@@ -1,0 +1,85 @@
+.main {
+      margin:0 auto; 
+      width:950px; 
+      position:absolute;
+}
+.header {
+  width:380px; 
+  height:210px; 
+  left:380px; 
+  top:30px; 
+  position:fixed; 
+  text-align:center; 
+  margin:0 auto;
+}
+.menu a { 
+  display: inline; 
+}
+.dilemma {
+    width:380px; 
+    height:210px; 
+    background-image:url('/images/bubble.jpg'); 
+    background-repeat:no-repeat; 
+    top:170px; 
+    left:380px; 
+    position:fixed; 
+    margin:0 auto;
+}
+.dilemma .text {
+    position: relative; 
+    text-align:center;  
+    vertical-align: middle; 
+    line-height: 150px;
+}
+.dilemma .asks {
+    position:relative;
+    top:30px;
+    left:90px;
+}
+.good {
+    width:230px; 
+    position:absolute; 
+    top:30px; 
+    right:650px; 
+    text-align:center;
+}
+
+.evil {
+  width:230px; 
+  text-align:center; 
+  position:absolute; 
+  top:30px; 
+  left:800px;
+}
+
+.input {
+				width: 200px;
+				border-left-style: none;
+				border-bottom-style: solid;
+				border-right-style: none;
+				border-top-style: none;
+				border-bottom-width: 2px;
+				font-family: georgia;				
+				background-color: #2f2f2f;
+				color: #e9ffb1;
+} 
+.evil .input {color:#F17B78;}
+
+.good .input {color:#E5ECF9;}
+
+.input .text{}
+
+.evil .button { 
+    position:absolute;
+    left:80px;
+}
+
+.good .button { 
+    position:absolute;
+    left:80px;
+}
+.suggestions{
+    position:relative;
+    top:40px;
+}
+

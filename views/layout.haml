@@ -1,0 +1,18 @@
+!!! Strict
+%html
+  %head
+    %title good angel bad devil
+    %link{:rel=>"stylesheet", :href=>"/stylesheets/blueprint/screen.css", :type=>"text/css", :media=>"screen, projection"}
+    %link{:rel=>"stylesheet", :href=>"/stylesheets/application.css", :type=>"text/css", :media=>"screen, projection"}
+    %script{:language => "javascript", :src => "jquery.js"}
+  %body
+    .main
+      .header
+        %h1 GoodAngelBadDevil
+        %h1 BadDevilGoodAngel
+        .menu
+          %a.button{:href => "/new"} Post your dillema
+          %a.button{:href => "/"} Browse
+          %a.button{:href => "/latest"} Latest
+          %a.button{:href => "/search"} Search
+      =yield  

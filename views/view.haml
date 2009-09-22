@@ -1,0 +1,36 @@
+.dilemma  
+  .text= @dilemma.text
+  .asks
+    %h3< 
+      ="asks <strong>#{@dilemma.by}</strong>" 
+      
+.good
+  %form{:action => "#{@dillema.id}/suggestions", :method => "post"}						
+    %h3
+      Angel
+      %input#user.input{:style=>"width:70px"} 
+      says:
+    %textarea#advice.input
+    %button.button{:type=>"submit"} Good Suggestion!
+    
+  .suggestions
+    -@dilemma.good_suggestions.each do |e|  
+      .box
+        ="Angel <strong>#{e.by}</strong> says:"
+        %h4= e.text
+
+.evil
+  %form						
+    %h3
+      Devil
+      %input#user.input{:style=>"width:70px"} 
+      says:
+    %textarea#advice.input
+    %button.button{:class=>"negative", :type=>"submit"} Evil Suggestion!
+    
+  .suggestions
+    -@dilemma.evil_suggestions.each do |e|  
+      .box-red
+        ="Devil <strong>#{e.by}</strong> says:"
+        %h4= e.text
+             
