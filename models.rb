@@ -6,7 +6,7 @@ require 'dm-aggregates'
 require 'dm-constraints'
 
  
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://db/budget.sqlite3')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://db/gabd.sqlite3')
 
 class Dilemma
   include DataMapper::Resource 
@@ -28,11 +28,11 @@ class Dilemma
     }
     
     def add_evil_suggestion(text, by)      
-      suggestions.build(:text => text, :by => by, :type => "e").save 
+      suggestions << suggestions.build(:text => text, :by => by, :type => "e")                   
     end
     
     def add_good_suggestion(text, by)      
-      suggestions.build(:text => text, :by => by, :type => "g").save      
+      suggestions << suggestions.build(:text => text, :by => by, :type => "g")
     end
     def good_suggestions
       suggestions.all(:type => 'g')
@@ -76,4 +76,10 @@ class NilClass
   end
 end
 
-DataMapper.auto_migrate!
+#DataMapper.auto_migrate!
+
+#Insert default values
+d = Dilemma.new(:text => "should I be working?", :by => "Michael")
+d.save
+#d.add_evil_suggestion("No!", "Peter")
+

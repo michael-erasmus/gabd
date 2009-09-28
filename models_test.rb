@@ -20,14 +20,12 @@ class ModelsTest < Test::Unit::TestCase
   end
   
   def test_suggestions
-    d = Dilemma.new(:text => "Should I make good suggestions or evil ones?", :by => "Michael")
+    d = Dilemma.new(:text => "Should I make good suggestions or evil ones?", :by => "Michael")    
     evil_s  = d.add_evil_suggestion("Devil advice is more fun!", "John")
     good_s = d.add_good_suggestion("Good suggestions!, it's uplifiting!", "Peter")    
-    
-    d.save
-    d = Dilemma.first
+    d.save 
     
     assert_equal 1, d.evil_suggestions.size
     assert_equal 1, d.good_suggestions.size
-  end
+  end  
 end

@@ -5,12 +5,12 @@
       ="asks <strong>#{@dilemma.by}</strong>" 
       
 .good
-  %form{:action => "#{@dillema.id}/suggestions", :method => "post"}						
+  %form{:action => "/#{@dilemma.id}/good_suggestions", :method => "post"}						
     %h3
       Angel
-      %input#user.input{:style=>"width:70px"} 
+      %input#by.input{:style=>"width:70px"} 
       says:
-    %textarea#advice.input
+    %textarea#text.input
     %button.button{:type=>"submit"} Good Suggestion!
     
   .suggestions
@@ -20,12 +20,12 @@
         %h4= e.text
 
 .evil
-  %form						
+  %form{:action => "/#{@dilemma.id}/evil_suggestions", :method => "post"}						
     %h3
       Devil
-      %input#user.input{:style=>"width:70px"} 
+      %input.input{:name => 'by', :style=>"width:70px"} 
       says:
-    %textarea#advice.input
+    %textarea.input{:name=> 'text'}
     %button.button{:class=>"negative", :type=>"submit"} Evil Suggestion!
     
   .suggestions
