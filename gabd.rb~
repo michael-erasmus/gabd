@@ -5,7 +5,6 @@ require 'models'
 get '/' do
 	#@dilemmas = Dilemma.all(:limit => 10, :order => [suggestions_count.desc])							
 	@dilemmas = Dilemma.all()							
-	haml :browse
 end				
 
 get '/:id' do

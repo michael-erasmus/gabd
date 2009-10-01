@@ -1,0 +1,14 @@
+%div{:class => suggestion_type}
+  %form{:action => "/#{@dilemma.id}/#{suggestion_type}_suggestions", :method => "post"}						
+    %h3
+      =suggester_title
+      %input.input{:name => "by", :style=>"width:70px"} 
+      says:
+    %textarea.input{:name => "text"}
+    %button.button{:type=>"submit"}= "#{suggestion_type} suggestion!"
+  
+  .suggestions
+    -@dilemma.send("#{suggestion_type}_suggestions").each do |e|  
+      %div{:class=>"box-#{box}"}
+        ="#{suggester_title} <strong>#{e.by}</strong> says:"
+        %h4= e.text

@@ -33,7 +33,8 @@
 		top:170px; 
     left:50%; 
 		margin-left: -190px;
-    position:fixed;    
+    position:fixed;
+    margin:0 auto;
 }
 .dilemma .text {
     position: relative; 
