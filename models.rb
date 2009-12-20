@@ -16,12 +16,12 @@ class Dilemma
     :key => true,
     :default => Proc.new {|r, p| r.text.sluggify if r.text} 
     
-  property :text, String, :length => 140, :nullable => false, :unique => true,
+  property :text, String, :length => 140, :required => true, :unique => true,
     :messages => { 
       :presence => "You didn't write anything!", 
       :is_unique => "Someone has posted this dilemma before!"
     }
-  property :by, String , :length => 50, :nullable => false,
+  property :by, String , :length => 50, :required => true,
     :messages => { 
       :presence => "Please enter your name"
     }
@@ -55,11 +55,11 @@ class Suggestion
   
   property :id , Serial
   
-  property :text, String, :length => 140, :nullable => false,  
+  property :text, String, :length => 140, :required => true,  
     :messages => { :presence => "You didn't write anything!" }
     
   property :dilemma_id, String, :length => 280  
-  property :by, String , :length => 50, :nullable => false,
+  property :by, String , :length => 50, :required => true,
     :messages => { :presence => "Please enter your name"}  
     
   property :type, String,  :length => 1 ,   :format => lambda {|s| s == "g" or s == "e" }
@@ -71,11 +71,9 @@ end
 
 
 
-DataMapper.auto_migrate!
+#DataMapper.auto_migrate!
 
 #Insert default values
-#d = Dilemma.new(:text => "should I be working?", :by => "Michael")
-#d.save
 #d.add_evil_suggestion("No!", "Peter")
 
 
@@ -98,4 +96,6 @@ end
 
 
 
+d = Dilemma.new(:text => "Should I have created this site?", :by => "Michael")
+d.save
 

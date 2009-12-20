@@ -19,6 +19,7 @@ get '/search' do
 end  
 
 get '/new' do 
+  @dilemma = Dilemma.new
   haml :new
 end  
 
