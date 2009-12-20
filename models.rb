@@ -3,7 +3,6 @@ require 'dm-core'
 require 'dm-validations' 
 require 'dm-timestamps'
 require 'dm-aggregates'
-require 'dm-constraints'
 
  
 DataMapper.setup(:default, 'sqlite3:db/gabd.sqlite3')
