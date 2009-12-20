@@ -5,7 +5,7 @@ require 'dm-timestamps'
 require 'dm-aggregates'
 
  
-DataMapper.setup(:default, 'sqlite3:db/gabd.sqlite3')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:db/gabd.sqlite3')
 
 class Dilemma
   include DataMapper::Resource 
