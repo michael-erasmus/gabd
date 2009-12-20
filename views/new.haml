@@ -1,0 +1,16 @@
+.center-column  
+  .center-form
+    %h2 Tell us your dilemma    
+    %form{:method => "post", :action => "/"}
+      Your name: 
+      %br
+      %input.input{:name => "by"}
+      %br
+      Your Dilemma:
+      %br
+      %textarea{:name=> "text", :class=> "input countdown limit_140_"}
+      %br  
+      %span.remaining
+      %br
+      %center
+        %button.button{:type=>"submit"}= "submit!"

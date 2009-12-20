@@ -6,7 +6,7 @@ require 'dm-aggregates'
 require 'dm-constraints'
 
  
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://db/gabd.sqlite3')
+DataMapper.setup(:default, 'sqlite3:db/gabd.sqlite3')
 
 class Dilemma
   include DataMapper::Resource 
@@ -27,12 +27,14 @@ class Dilemma
       :presence => "Please enter your name"
     }
     
+  property :date_created, DateTime, :default => Time.now 
+     
     def add_evil_suggestion(text, by)      
-      suggestions << suggestions.build(:text => text, :by => by, :type => "e")                   
+      suggestions.new(:text => text, :by => by, :type => "e")                   
     end
     
     def add_good_suggestion(text, by)      
-      suggestions << suggestions.build(:text => text, :by => by, :type => "g")
+      suggestions.new(:text => text, :by => by, :type => "g")
     end
     def good_suggestions
       suggestions.all(:type => 'g')
@@ -40,9 +42,14 @@ class Dilemma
     def evil_suggestions
       suggestions.all(:type => 'e')
     end
+    
+    def Dilemma.latest
+      Dilemma.all(:date_created => ((DateTime.now - 2)..DateTime.now))
+    end 
 end  
 
 class Suggestion 
+  
   include DataMapper::Resource 
   
   belongs_to :dilemma
@@ -62,6 +69,20 @@ class Suggestion
     :message => "Someone already said that!"
 end
 
+
+
+
+DataMapper.auto_migrate!
+
+#Insert default values
+#d = Dilemma.new(:text => "should I be working?", :by => "Michael")
+#d.save
+#d.add_evil_suggestion("No!", "Peter")
+
+
+#Helpers
+
+#Sluggify
 class String
   def sluggify
     slug = self.downcase.gsub(/[^0-9a-z_ -]/i, '')
@@ -76,10 +97,6 @@ class NilClass
   end
 end
 
-#DataMapper.auto_migrate!
 
-#Insert default values
-d = Dilemma.new(:text => "should I be working?", :by => "Michael")
-d.save
-#d.add_evil_suggestion("No!", "Peter")
+
 

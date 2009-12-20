@@ -1,11 +1,13 @@
 %div{:class => suggestion_type}
-  %form{:action => "/#{@dilemma.id}/#{suggestion_type}_suggestions", :method => "post"}						
+  %form.suggestion-form{:action => "/#{@dilemma.id}/#{suggestion_type}_suggestions", :method => "post"}						
     %h3
       =suggester_title
-      %input.input{:name => "by", :style=>"width:70px"} 
+      %input.input{:name => "by", :style=>"width:70px", :id=> "by"} 
       says:
-    %textarea.input{:name => "text"}
-    %button.button{:type=>"submit"}= "#{suggestion_type} suggestion!"
+    %textarea{:class=>"input countdown limit_140_", :name => "text", :id=> "text"}
+    %br  
+    %span.remaining
+    %button{:class => button, :type=>"submit"}= "#{suggestion_type} suggestion!"
   
   .suggestions
     -@dilemma.send("#{suggestion_type}_suggestions").each do |e|  

@@ -1,0 +1,7 @@
+.center-column
+  .center-form
+    %h3= "Search"
+    %form.search-form{:action => "/search", :method => "post"}
+      %input.input{:type => "text", :name => "search_string"}
+      %center
+        %button{:class => "button", :type=>"submit"}= "Search"

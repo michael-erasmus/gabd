@@ -29,4 +29,17 @@ class ModelsTest < Test::Unit::TestCase
     assert_equal 1, d.evil_suggestions.size
     assert_equal 1, d.good_suggestions.size
   end  
+  
+  def teardown
+      Dilemma.all.destroy!
+      Suggestion.all.destroy!
+  end
+    
+  def test_latest_dillemas
+    Dilemma.new(:text => "text", :by => "by", :date_created => DateTime.now-1).save
+    Dilemma.new(:text => "text1", :by => "by", :date_created => DateTime.now-2).save
+    Dilemma.new(:text => "text3", :by => "by", :date_created => DateTime.now-3).save
+    
+    assert_equal Dilemma.all(:date_created => ((DateTime.now - 2)..DateTime.now)), Dilemma.latest
+  end 
 end

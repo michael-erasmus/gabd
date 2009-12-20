@@ -94,4 +94,13 @@
     position:relative;
     top:40px;
 }
+.error {
+font: 12pt verdana;
+position:absolute;
+top:100px;
+padding-left: 10px
+}
+.center-form{
+	text-align:center; 
+}
 

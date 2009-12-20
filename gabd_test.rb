@@ -3,6 +3,7 @@ require 'rubygems'
 require 'test/unit'
 require 'rack/test'
 require 'models'
+require 'hpricot'
 
 set :environment, :test
 
@@ -17,6 +18,13 @@ class SinatraTest < Test::Unit::TestCase
 	def assert_contains(text)
  		assert last_response.body.include?(text), "Does not contain #{text}"
 	end	
+  def assert_with_hpricot(assert_method)
+    assert assert_method.call(last_doc)
+  end
+  
+  def last_doc
+    Hpricot.parse(last_response.body)  
+  end  
 end
 
 class ViewDillemaTest < SinatraTest    
@@ -73,7 +81,7 @@ class BrowseDillemasTest < SinatraTest
 		assert_contains @dilemma_should_i_lie.by
 		assert_contains @dilemma_should_i_lie.text		
 		assert_contains "<a href='/#{@dilemma_good_or_evil.id}'>"
-	end					
+	end					  
 end	
 
 class EditSuggestionTest < SinatraTest
@@ -117,3 +125,82 @@ class EditSuggestionTest < SinatraTest
     assert_contains "Pure good!"
   end
 end
+class NewDillemaTest < SinatraTest
+  
+  def test_new_dilemma
+    get "/new"    
+    assert_equal "http://example.org/new", last_request.url    
+    form = last_doc.at("form")
+    assert !form.nil?
+    assert_equal "post",  form.attributes["method"] 
+    assert_equal "/", form.attributes["action"]
+    
+    assert_equal 2, (last_doc/".input").length      
+  end
+  
+  def test_create_dilemma
+    post "/",
+      :text => "My dillema text" , :by => "Michael"    
+    d = Dilemma.first(:text => "My dillema text", :by => "Michael")
+    assert !(d.nil?)  
+    follow_redirect!
+    
+    assert_equal "http://example.org/#{d.id}", last_request.url
+  end  
+  
+  def test_create_dilemma_fails
+    post "/", :text => "", :by => ""
+      
+    follow_redirect!
+    assert_equal "http://example.org/new", last_request.url  
+  end  
+end
+
+class LatestDillemaTest < SinatraTest
+  def test_get_latest    
+
+    Dilemma.new(:text => "text", :by => "by", :date_created => DateTime.now-1).save
+    Dilemma.new(:text => "text1", :by => "by", :date_created => DateTime.now-2).save
+    Dilemma.new(:text => "text3", :by => "by", :date_created => DateTime.now-3).save
+    
+    get "/latest"
+   
+    dilemmas_on_page = last_doc/".dilemma" 
+    
+    assert_equal Dilemma.latest.size, dilemmas_on_page.size  
+  end
+end
+
+class SearchTest < SinatraTest
+  def test_get_search
+    get '/search'
+    form = last_doc.at("form")
+    assert_equal "/search", form.attributes["action"]
+    assert_equal "post", form.attributes["method"]
+    
+    assert !last_doc.at(".input").nil?
+    assert_equal "search_string", last_doc.at(".input").attributes["name"]    
+  end  
+  
+  def test_empty_search_term
+    post '/search' , :search_string => ""
+    follow_redirect!
+    assert_equal 'http://example.org/search', last_request.url
+
+    assert !(last_doc.at("form").nil?)
+  end  
+  
+  def test_post_search_not_found
+    post '/search', :search_string => "will not be found"    
+    assert_contains "<strong>will not be found</strong> was not found!"
+  end  
+  
+  def test_search
+     Dilemma.new(:text => "el packa", :by => "Michael", :date_created => DateTime.now-1).save
+     
+     post'/search', :search_string => "el packa"    
+     
+     #resul
+  end 
+end  
+  
