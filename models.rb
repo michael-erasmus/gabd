@@ -26,7 +26,7 @@ class Dilemma
       :presence => "Please enter your name"
     }
     
-  property :date_created, DateTime, :default => Time.now 
+  property :date_created, DateTime, :default => DateTime.now 
      
     def add_evil_suggestion(text, by)      
       suggestions.new(:text => text, :by => by, :type => "e")                   
