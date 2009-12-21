@@ -16,7 +16,7 @@ class Dilemma
     :key => true,
     :default => Proc.new {|r, p| r.text.sluggify } 
     
-  property :text, String, :length => 140, :required => true, :unique => true,
+  property :text, String, :length => 140, :required => true, :unique => true, :nullable => false
     :messages => { 
       :presence => "You didn't write anything!", 
       :is_unique => "Someone has posted this dilemma before!"
