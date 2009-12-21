@@ -2,6 +2,11 @@ require 'rubygems'
 require 'sinatra'
 require 'models'
 require 'haml'
+require 'rack-flash'
+
+use Rack::Session::Cookie
+use Rack::Flash
+
 
 get '/' do
 	#@dilemmas = Dilemma.all(:limit => 10, :order => [suggestions_count.desc])							
@@ -18,8 +23,7 @@ get '/search' do
     haml :search
 end  
 
-get '/new' do 
-  @dilemma = Dilemma.new
+get '/new' do
   haml :new
 end  
 
@@ -48,11 +52,12 @@ post '/:id/good_suggestions' do
   redirect "/#{@dilemma.id}"
 end
 
-post '/' do
+post '/' do    
     @dilemma = Dilemma.new(:text => params['text'], :by => params['by'])
     if @dilemma.save
       redirect "/#{@dilemma.id}"
     else
+      flash[:errors] = @dilemma.errors.full_messages
       redirect "/new"  
     end  
 end
