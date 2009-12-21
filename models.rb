@@ -16,12 +16,12 @@ class Dilemma
     :key => true,
     :default => Proc.new {|r, p| r.text.sluggify } 
     
-  property :text, String, :length => 140, :required => true, :unique => true, :nullable => false
+  property :text, String, :length => 140, :required => true, :unique => true, :nullable => false,
     :messages => { 
       :presence => "You didn't write anything!", 
       :is_unique => "Someone has posted this dilemma before!"
     }
-  property :by, String , :length => 50, :required => true,
+  property :by, String , :length => 50, :required => true, :nullable => false,
     :messages => { 
       :presence => "Please enter your name"
     }
@@ -55,11 +55,11 @@ class Suggestion
   
   property :id , Serial
   
-  property :text, String, :length => 140, :required => true,  
+  property :text, String, :length => 140, :required => true, :nullable => false, 
     :messages => { :presence => "You didn't write anything!" }
     
   property :dilemma_id, String, :length => 280  
-  property :by, String , :length => 50, :required => true,
+  property :by, String , :length => 50, :required => true, :nullable => false,
     :messages => { :presence => "Please enter your name"}  
     
   property :type, String,  :length => 1 ,   :format => lambda {|s| s == "g" or s == "e" }
