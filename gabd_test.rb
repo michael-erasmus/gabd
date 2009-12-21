@@ -153,6 +153,8 @@ class NewDillemaTest < SinatraTest
       
     follow_redirect!
     assert_equal "http://example.org/new", last_request.url  
+
+    assert_equal 2, (last_doc/".error").size
   end  
 end
 

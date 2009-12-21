@@ -7,8 +7,8 @@
     %script{:language => "javascript", :src => "/javascripts/jquery.js"}    
     %script{:language => "javascript", :src => "/javascripts/application.js"}      
   %body    
-    .main
-      .header
+    .main     
+      .header        
         %h1 GoodAngelBadDevil
         %h1 BadDevilGoodAngel
         .menu          
@@ -16,4 +16,9 @@
           %a.button{:href => "/"} Browse
           %a.button{:href => "/latest"} Latest
           %a.button{:href => "/search"} Search
+          -if flash.has?(:errors)
+            -flash[:errors].each do |e|
+              .error= e
       =yield  
+      
+    

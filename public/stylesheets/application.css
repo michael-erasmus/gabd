@@ -96,8 +96,8 @@
 }
 .error {
 font: 12pt verdana;
-position:absolute;
-top:100px;
+position:relative;
+top:260px;
 padding-left: 10px
 }
 .center-form{

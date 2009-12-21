@@ -14,7 +14,7 @@ class Dilemma
   
   property :id, String, :length => 280, 
     :key => true,
-    :default => Proc.new {|r, p| r.text.sluggify if r.text} 
+    :default => Proc.new {|r, p| r.text.sluggify } 
     
   property :text, String, :length => 140, :required => true, :unique => true,
     :messages => { 
@@ -63,7 +63,7 @@ class Suggestion
     :messages => { :presence => "Please enter your name"}  
     
   property :type, String,  :length => 1 ,   :format => lambda {|s| s == "g" or s == "e" }
-  property :date_created, DateTime, :default => Time.now 
+  property :date_created, DateTime, :default => DateTime.now 
   validates_is_unique :text, :scope => :dilemma_id,    
     :message => "Someone already said that!"
 end

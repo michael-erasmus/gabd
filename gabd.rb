@@ -57,7 +57,8 @@ post '/' do
     if @dilemma.save
       redirect "/#{@dilemma.id}"
     else
-      flash[:errors] = @dilemma.errors.full_messages
+      #remove the 'Id must not be blank' message
+      flash[:errors] = @dilemma.errors.full_messages[1..-1]
       redirect "/new"  
     end  
 end
