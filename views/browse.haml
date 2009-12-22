@@ -1,7 +1,6 @@
 .center-column
   -@dilemmas.each do |dilemma|    
     .dilemma
-      %p
-        .text
-          %a{:href=> "/#{dilemma.id}" }= dilemma.text      
-        .asks= "asks <strong>#{dilemma.by}</strong>"
+      .text
+        %a{:href=> "/#{dilemma.id}" }= dilemma.text      
+      .asks= "asks <strong>#{dilemma.by}</strong>"
