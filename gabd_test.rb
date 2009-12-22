@@ -97,7 +97,7 @@ class EditSuggestionTest < SinatraTest
   
   def test_add_evil_suggestion
     post "/#{@dilemma.id}/evil_suggestions",
-      :text => "Pure evil!", :by => "Peter" 
+      :evil_text => "Pure evil!", :evil_by => "Peter" 
     follow_redirect!
     
     assert_equal "http://example.org/should-i-give-good-suggestions-or-evil-ones", last_request.url
@@ -112,7 +112,7 @@ class EditSuggestionTest < SinatraTest
 
   def test_add_good_suggestion
     post "/#{@dilemma.id}/good_suggestions",
-      :text => "Pure good!", :by => "Michael" 
+      :good_text => "Pure good!", :good_by => "Michael" 
     follow_redirect!
     
     assert_equal "http://example.org/should-i-give-good-suggestions-or-evil-ones", last_request.url

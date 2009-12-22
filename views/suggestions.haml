@@ -3,15 +3,16 @@
     -@dilemma.suggestions.each do |s|
       - s.errors.each do |e|
         = e
-    %h3
-      =suggester_title
-      %input.input{:name => "by", :style=>"width:70px", :id=> "by"} 
-      says:
-    %textarea{:class=>"input countdown limit_140_", :name => "text", :id=> "text"}
-    %br      
-    %span.remaining 
-    %br
-    %button{:class => button, :type=>"submit"}= "#{suggestion_type} suggestion!"
+    %p    
+      %h3
+        =suggester_title
+        %input.input{:name => "by", :style=>"width:70px", :id=> "#{suggestion_type}_by"} 
+        says:
+      %textarea{:class=>"input countdown limit_140_", :name => "text", :id=> "#{suggestion_type}_text", :rows => 3, :cols => 19}
+      %br      
+      %span.remaining 
+      %br
+      %button{:class => button, :type=>"submit"}= "#{suggestion_type} suggestion!"
   
   .suggestions
     -@dilemma.send("#{suggestion_type}_suggestions").each do |e|  

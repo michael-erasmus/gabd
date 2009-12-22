@@ -40,14 +40,14 @@ end
 
 post '/:id/evil_suggestions' do  
   @dilemma = Dilemma.get!(params['id'])  
-  @dilemma.add_evil_suggestion(params['text'], params['by'])
+  @dilemma.add_evil_suggestion(params['evil_text'], params['evil_by'])
   @dilemma.save  
   redirect "/#{@dilemma.id}"
 end
 
 post '/:id/good_suggestions' do  
   @dilemma = Dilemma.get!(params['id'])  
-  @dilemma.add_good_suggestion(params['text'], params['by'])
+  @dilemma.add_good_suggestion(params['good_text'], params['good_by'])
   @dilemma.save      
   redirect "/#{@dilemma.id}"
 end
