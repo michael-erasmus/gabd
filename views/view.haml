@@ -2,7 +2,7 @@
   %p
   .text= @dilemma.text
   .asks
-    %h3= "asks <strong>#{@dilemma.by}</strong>" 
+    = "asks <strong>#{@dilemma.by}</strong>" 
 
 = partial :suggestions, :locals =>{:suggestion_type => "good", :suggester_title => "Angel", :box => "blue", :button=> "button"}      
 = partial :suggestions, :locals =>{:suggestion_type => "evil", :suggester_title => "Devil", :box => "red", :button=> "button negative"}            
