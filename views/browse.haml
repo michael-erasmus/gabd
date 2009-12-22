@@ -1,6 +1,6 @@
 .center-column
   -@dilemmas.each do |dilemma|    
-    .dilemma{:class=>"center-fixed"}
+    .dilemma
       %p
         .text
           %a{:href=> "/#{dilemma.id}" }= dilemma.text      
