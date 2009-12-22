@@ -95,12 +95,24 @@
     top:40px;
 }
 .error {
-font: 12pt verdana;
-position:relative;
-top:270px;
-padding-left: 10px
+  font: 12pt verdana;
+  position:relative;
+  top:270px;
+  padding-left: 10px
 }
 .center-form{
 	text-align:center; 
+}
+
+.footer-valid{  
+  position:absolute;  
+  bottom:10px;
+  right:10px;
+}
+
+.footer-about{
+  position:absolute;  
+  bottom:10px;
+  left:10px;
 }
 
