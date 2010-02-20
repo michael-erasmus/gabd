@@ -6,11 +6,15 @@ class ModelsTest < Test::Unit::TestCase
   def test_sluggify
     assert_equal "should-this-string-be-sluggified", "should this string be sluggified?".sluggify
   end
-  
+
   def test_dilemma_text_has_correct_slug
     d = Dilemma.new(:text => "Should I make good suggestions or evil ones?")    
     assert_equal d.text.sluggify, d.id
   end  
+  
+  def test_random_dilemmma
+    Dilemma.random
+  end
   
   def test_has_text_and_by_check
     d = Dilemma.new 

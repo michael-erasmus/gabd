@@ -18,6 +18,9 @@ class SinatraTest < Test::Unit::TestCase
 	def assert_contains(text)
  		assert last_response.body.include?(text), "Does not contain #{text}"
 	end	
+	def contains(text)
+	  last_response.body.include?(text)
+	end
   def assert_with_hpricot(assert_method)
     assert assert_method.call(last_doc)
   end
@@ -47,7 +50,7 @@ class ViewDillemaTest < SinatraTest
     
     def test_show_dilemma
       assert_contains @dilemma.text
-      assert_contains "h3>asks <strong>#{@dilemma.by}</strong></h3>"
+      assert_contains "asks <strong>#{@dilemma.by}</strong>"
     end  
     
     def test_has_evil_suggestions            
@@ -73,14 +76,17 @@ class BrowseDillemasTest < SinatraTest
     Dilemma.all.destroy!
   end
 
-	def test_browse
+	def test_random
+	  # stub out find_by_sql	  
+	  class Dillema
+	    def find_by_sql(query)
+	      @query = query
+	      @dilemma_good_or_evil
+	    end
+	  end
+	      
 		get "/"
-		
-		assert_contains @dilemma_good_or_evil.by
-		assert_contains @dilemma_good_or_evil.text
-		assert_contains @dilemma_should_i_lie.by
-		assert_contains @dilemma_should_i_lie.text		
-		assert_contains "<a href='/#{@dilemma_good_or_evil.id}'>"
+		assert (contains(@dilemma_good_or_evil.text) || contains(@dilemma_good_or_evil.by))
 	end					  
 end	
 

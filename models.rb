@@ -3,7 +3,7 @@ require 'dm-core'
 require 'dm-validations' 
 require 'dm-timestamps'
 require 'dm-aggregates'
-
+require 'dm-ar-finders'
  
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:db/gabd.sqlite3')
 
@@ -44,7 +44,11 @@ class Dilemma
     
     def Dilemma.latest
       Dilemma.all(:date_created => ((DateTime.now - 2)..DateTime.now))
-    end 
+    end
+     
+    def self.random
+      find_by_sql("SELECT * FROM dilemmas ORDER BY RANDOM() LIMIT 1")
+    end
 end  
 
 class Suggestion 

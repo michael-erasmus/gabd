@@ -10,7 +10,7 @@ use Rack::Flash
 
 get '/' do
 	#@dilemmas = Dilemma.all(:limit => 10, :order => [suggestions_count.desc])							
-	@dilemmas = Dilemma.all()							
+	@dilemmas = Dilemma.random							
 	haml :browse
 end				
 
